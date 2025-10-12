@@ -1,11 +1,6 @@
 import { EVENTS } from "./consts.js"
 import { useState, useEffect } from "react"
-
-export function navigate (href) {
-  window.history.pushState({}, '', href)  // Cambia la barra de direcciones
-  const navigationEvent = new Event(EVENTS.PUSHSTATE) // Crea un nuevo evento llamado pushstate
-  window.dispatchEvent(navigationEvent) // Dispara el evento
-}
+import { match } from "path-to-regexp"
 
 export function Router({ routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
@@ -24,6 +19,18 @@ export function Router({ routes = [], defaultComponent: DefaultComponent = () =>
     }
   }, [])
 
-  const Page = routes.find(({ path }) => path === currentPath)?.Component
+  let routeParams = {}
+
+  const Page = routes.find(({ path }) => {
+    if (path === currentPath) return true
+    
+    // rutas dinámicas como /search/:query
+    const matcherUrl = match(path, { decode: decodeURIComponent })
+    const matched = matcherUrl(currentPath)
+    if (!matched) return false
+
+    routeParams = matched.params
+    return true
+  })?.Component
   return Page ? <Page /> : <DefaultComponent />
 }

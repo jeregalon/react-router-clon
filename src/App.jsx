@@ -1,4 +1,4 @@
-import { Router } from "./functions.jsx"
+import { Router } from "./Router"
 import { EVENTS, routes } from "./consts.js"
 
 
