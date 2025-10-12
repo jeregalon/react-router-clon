@@ -40,8 +40,6 @@ export function Router({ children, defaultComponent: DefaultComponent = () => <h
     return true
   })?.Component
 
-  console.log(Page)
-
   return Page 
     ? <Page routeParams={routeParams}/> 
     : <DefaultComponent />
