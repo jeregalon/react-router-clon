@@ -34,12 +34,13 @@ export function Router({ children, defaultComponent: DefaultComponent = () => <h
     // rutas dinámicas como /search/:query
     const matcherUrl = match(path, { decode: decodeURIComponent })
     const matched = matcherUrl(currentPath)
-    console.log(matched)
     if (!matched) return false
 
     routeParams = matched.params
     return true
   })?.Component
+
+  console.log(Page)
 
   return Page 
     ? <Page routeParams={routeParams}/> 
