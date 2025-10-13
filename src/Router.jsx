@@ -36,6 +36,8 @@ export function Router({ children, defaultComponent: DefaultComponent = () => <h
     const matched = matcherUrl(currentPath)
     if (!matched) return false
 
+    console.log(matched)
+
     routeParams = matched.params
     return true
   })?.Component

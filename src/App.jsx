@@ -13,9 +13,9 @@ function App() {
     <main>
       <Suspense fallback={<div>Loading...</div>}>
         <Router defaultComponent={Page404}>
-          <Route path='/' Component={LazyHomePage} />
-          <Route path='/about' Component={LazyAboutPage} />
-          <Route path='/search/:query' Component={LazySearchPage} />
+          <Route path='/:lang' Component={LazyHomePage} />
+          <Route path='/:lang/about' Component={LazyAboutPage} />
+          <Route path='/:lang/search/{:query}' Component={LazySearchPage} />
         </Router> 
       </Suspense>
     </main>
