@@ -2,7 +2,7 @@ import { EVENTS } from "./consts.js"
 import { useState, useEffect, Children } from "react"
 import { match } from "path-to-regexp"
 
-export function Router({ children, defaultComponent: DefaultComponent = () => <h1>404</h1>}) {
+export function Router({ children, routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
   useEffect(() => {
@@ -28,7 +28,9 @@ export function Router({ children, defaultComponent: DefaultComponent = () => <h
     return isRoute ? props : null  
   })
 
-  const Page = routesFromChildren.find(({ path }) => {
+  const routesToUse = routes.concat(routesFromChildren).filter(Boolean)
+
+  const Page = routesToUse.find(({ path }) => {
     if (path === currentPath) return true
     
     // rutas dinámicas como /search/:query
