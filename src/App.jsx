@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react"
-import { Router } from "./Router"
-import { EVENTS } from "./consts.js"
-import Page404 from "./Page404.jsx"
-import Route from "./Route.jsx"
+import { Router } from "./components/Router.jsx"
+import { EVENTS } from "./utils/consts.js"
+import Page404 from "./components/Page404.jsx"
+import Route from "./components/Route.jsx"
 
 const LazyAboutPage = lazy(() => import('./pages/AboutPage.jsx')) // importación dinámica
 const LazyHomePage = lazy(() => import('./pages/HomePage.jsx'))

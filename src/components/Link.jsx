@@ -1,4 +1,4 @@
-import { navigate } from "./functions"
+import { navigate } from "../utils/functions"
 
 export default function Link ({ target, to, ...props }) {
   const handleClick = (event) => {

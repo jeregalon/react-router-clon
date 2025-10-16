@@ -1,5 +1,5 @@
-import { PAGES, useI18n } from "../consts";
-import Link from "../Link";
+import { PAGES, useI18n } from "../utils/consts";
+import Link from "../components/Link";
 
 export default function AboutPage ({ routeParams }) {
   const lang = routeParams.lang ?? 'es'

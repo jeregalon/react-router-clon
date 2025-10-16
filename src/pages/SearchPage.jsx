@@ -1,4 +1,4 @@
-import { PAGES, useI18n } from "../consts";
+import { PAGES, useI18n } from "../utils/consts";
 
 export default function SearchPage ({ routeParams }) {
   const lang = routeParams.lang ?? 'es'

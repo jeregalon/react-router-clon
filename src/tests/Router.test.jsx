@@ -1,12 +1,12 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { Router } from "../Router";
+import { Router } from "../components/Router";
 import { Component } from "react";
-import { getCurrentPath } from "../utils";
-import Route from "../Route";
-import Link from "../Link";
+import { getCurrentPath } from "../utils/getCurrentPath";
+import Route from "../components/Route";
+import Link from "../components/Link";
 
-vi.mock('../utils.js', () => ({
+vi.mock('../utils/getCurrentPath.js', () => ({
   getCurrentPath: vi.fn()
 }))
 
@@ -42,25 +42,25 @@ describe('Router', () => {
     render(<Router routes={routes}/>)
     expect(screen.getByText('About')).toBeTruthy()
   })
-})
 
-it('should navigate using Links', () => {
-  getCurrentPath.mockReturnValue('/')
+  it('should navigate using Links', () => {
+    getCurrentPath.mockReturnValue('/')
 
-  render(
-    <Router>
-      <Route path='/' Component={() => {
-        return (
-          <>
-            <h1>Home</h1>
-            <Link to='/about'>Go to About</Link>
-          </>
-        )
-      }}/>
-      <Route path='/about' Component={() => <h1>About</h1>} />
-    </Router>
-  )
+    render(
+      <Router>
+        <Route path='/' Component={() => {
+          return (
+            <>
+              <h1>Home</h1>
+              <Link to='/about'>Go to About</Link>
+            </>
+          )
+        }}/>
+        <Route path='/about' Component={() => <h1>About</h1>} />
+      </Router>
+    )
 
-  screen.getByText(/Go to About/).click()
-  expect(screen.getAllByText(/About/)).toBeTruthy()
+    screen.getByText(/Go to About/).click()
+    expect(screen.getAllByText(/About/)).toBeTruthy()
+  })
 })
